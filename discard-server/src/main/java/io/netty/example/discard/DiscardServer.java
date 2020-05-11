@@ -5,6 +5,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.example.time.TimeDecoder;
 
 public class DiscardServer {
     private int port;
@@ -23,6 +24,7 @@ public class DiscardServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {//4
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(new DiscardServerHandler());
+//                            socketChannel.pipeline().addLast(new TimeDecoder(), new DiscardServerHandler());//验证
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)//5

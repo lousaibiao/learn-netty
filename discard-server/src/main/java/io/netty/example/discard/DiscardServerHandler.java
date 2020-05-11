@@ -7,8 +7,10 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 
 import java.nio.charset.Charset;
+import java.util.UUID;
 
 public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
+    private UUID uuid = UUID.randomUUID();
 //    @Override
 //    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 ////        super.channelRead(ctx, msg);
@@ -20,6 +22,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         final ByteBuf in = (ByteBuf) msg;
         try {
+            System.out.println(uuid);
             System.out.println(in.toString(CharsetUtil.US_ASCII));
         } finally {
             in.release();

@@ -1,4 +1,4 @@
-> [文档](https://netty.io/index.html) [使用手册](https://netty.io/wiki/user-guide-for-4.x.html#wiki-h3-14)
+> [文档](https://netty.io/index.html) [使用手册](https://netty.io/wiki/user-guide-for-4.x.html)
 >
 > 近期公司通过`TCP`连接的的方式接了一个硬件设备，用了最基础的`ServerSocket`类，参考的oracle的[文档](https://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html)。实现的比较简单，放在[github](https://github.com/lousaibiao/danxihuanbao-socketserver-java)上，不过这里应该用`Netty`才是正解。所以，过一下`Netty`的入门文档。
 
@@ -43,7 +43,7 @@ Netty是一个**异步** **事件驱动** **网络框架** ，可以用来快速
 
 
 
-## 编写一个Discard 服务器
+## 编写一个Discard Server
 
 ### 前半部分
 
@@ -129,7 +129,7 @@ public class DiscardServer {
                             socketChannel.pipeline().addLast(new DiscardServerHandler());
                         }
                     })
-                    .option(ChannelOption.SO_BACKLOG, 128)//5
+                    .option(ChannelOption.SO_BACKLOG, 128)//5 最大连接数128
                     .childOption(ChannelOption.SO_KEEPALIVE, true);//6
 
             //绑定端口启动服务
@@ -211,7 +211,7 @@ msg可以直接转换成`ByteBuf`对象，然后用ByteBuf的toString方法，�
 
 ![pic](https://images.cnblogs.com/cnblogs_com/sheldon-lou/1761451/o_20051011151747.png)
 
-## 写一个Echo服务器
+## 写一个Echo Server
 
 我们写一个Echo服务，客户端输入什么，我们就回复什么。
 
@@ -232,7 +232,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
 ![pic](https://images.cnblogs.com/cnblogs_com/sheldon-lou/1761451/o_20051011581148.png)
 
-## 写一个时间服务器
+## 写一个时间 Server
 
 这个例子用来实现一个[Time](https://tools.ietf.org/html/rfc868)协议。通过实现这个协议，我们可以了解Netty如何**构造**和**发送**数据。根据RFC868协议，Time协议有这么几步
 
@@ -305,7 +305,7 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
    channelFuture.addListener(ChannelFutureListener.CLOSE);
    ```
 
-5. 测试一下，当我们一连接上，就会收到server返回的4个字节的数据，然后关闭连接。
+5. 用rdate 测试一下。测试通过。
 
-   ![pic](https://images.cnblogs.com/cnblogs_com/sheldon-lou/1761451/o_20051014365250.png)
+   ![pic](https://images.cnblogs.com/cnblogs_com/sheldon-lou/1761451/o_20051107170651.png)
 

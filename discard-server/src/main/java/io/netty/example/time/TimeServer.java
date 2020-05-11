@@ -46,6 +46,6 @@ public class TimeServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new TimeServer(8080).run();
+        new TimeServer(37).run();
     }
 }
